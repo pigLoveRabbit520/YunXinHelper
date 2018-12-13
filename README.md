@@ -34,3 +34,20 @@ $entrance->user()->updateUserInfo($accid, $name, $icon);
 # 批量获取用户名片
 $entrance->user()->getUserInfos($accids);
 ```
+
+### 消息功能
+```
+# 文本消息
+$entrance->sendTextMsg($accidFrom, $to, $open, $text);
+
+# 图片消息
+$entrance->sendPictureMsg($accidFrom, $to, $open,
+        $picName, $picMD5, $picUrl, $picExt, $picWidth, $picHeight, $picSize);
+
+# 批量文本消息
+$entrance->sendTextBatchMsg($accidFrom, $accidsTo, $text);
+
+
+# 发送自定义系统通知
+$entrance->sendAttachMsg($from, CHAT::CHAT_ONT_TO_ONE, $to, $attach);
+```
