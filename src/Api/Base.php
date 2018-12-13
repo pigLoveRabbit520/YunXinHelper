@@ -15,7 +15,7 @@ use YunXinHelper\Excetption\YunXinNetworkException;
 
 class Base
 {
-    private $baseUrl = 'https://api.netease.im/nimserver';
+    private $baseUrl = 'https://api.netease.im/nimserver/';
 
     const HEX_DIGITS = "0123456789abcdefghijklmn";
 
@@ -113,6 +113,10 @@ class Base
 
         $joinString = $this->appSecrt . $this->nonceStr . $this->curTime;
         $this->checkSum = sha1($joinString);
+    }
+
+    protected function json_encode_chinese($str) {
+        return json_encode($attach, JSON_UNESCAPED_UNICODE);
     }
 
     /**

@@ -47,9 +47,9 @@ class Chat extends Base
      * @param string $body 最大长度5000字符，为一个JSON串
      * @param bool $antispam
      * @param string $antispamCustom
-     * @param $option
-     * @param $pushcontent
-     * @param $payload
+     * @param string $option
+     * @param string $pushcontent
+     * @param array $payload
      * @param $ext
      * @param array $forcePushList
      * @param $forcePushContent
@@ -64,9 +64,9 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinBusinessException
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
-    private function sendMsg($accidFrom, $accidTo, $open, $type, $body, $antispam, $antispamCustom,
-                            $option, $pushContent, $payload, $ext, array $forcePushList, $forcePushContent,
-                            $forcePushAll, $bid, $useYidun, $markRead, $checkFriend) {
+    private function sendMsg($accidFrom, $accidTo, $open, $type, $body, $antispam = false, $antispamCustom = '',
+                            $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
+                            $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
         if (!$accidFrom || !is_string($accidFrom)) {
             throw new YunXinArgExcetption('发送者id不合法！');
         }
@@ -81,7 +81,7 @@ class Chat extends Base
             throw new \LogicException('send msg open参数不合法');
         }
 
-        $res = $this->sendRequest('/msg/sendMsg.action', [
+        $res = $this->sendRequest('msg/sendMsg.action', [
             'from' => $accidFrom,
             'ope' => $open,
             'to' => $accidTo,
@@ -91,7 +91,7 @@ class Chat extends Base
             'antispamCustom' => $antispamCustom,
             'option' => $option,
             'pushcontent' => $pushContent,
-            'payload' => $payload,
+            'payload' => json_encode($payload),
             'ext' => $ext,
             'forcepushlist' => json_encode($forcePushList),
             'forcepushcontent' => $forcePushContent,
@@ -109,12 +109,12 @@ class Chat extends Base
      * @param $accidFrom
      * @param $to
      * @param int $open 0：点对点个人消息，1：群消息（高级群），其他返回414
-     * @param $text
-     * @param $antispam
-     * @param $antispamCustom
-     * @param $option
-     * @param $pushContent
-     * @param $payload
+     * @param string $text
+     * @param bool $antispam
+     * @param string $antispamCustom
+     * @param string $option
+     * @param string $pushContent
+     * @param array $payload
      * @param $ext
      * @param array $forcePushList
      * @param $forcePushContent
@@ -129,9 +129,9 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinBusinessException
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
-    public function sendTextMsg($accidFrom, $to, $open, $text, $antispam, $antispamCustom,
-                                $option, $pushContent, $payload, $ext, array $forcePushList = [], $forcePushContent,
-                                $forcePushAll, $bid, $useYidun, $markRead, $checkFriend) {
+    public function sendTextMsg($accidFrom, $to, $open, $text, $antispam = false, $antispamCustom = '',
+                                $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
+                                $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
         $body = json_encode([
             'msg' => $text
         ]);
@@ -171,8 +171,8 @@ class Chat extends Base
      * @param int $picWidth
      * @param int $picHeight
      * @param int $picSize
-     * @param $antispam
-     * @param $antispamCustom
+     * @param bool $antispam
+     * @param string $antispamCustom
      * @param $option
      * @param $pushContent
      * @param $payload
@@ -192,9 +192,9 @@ class Chat extends Base
      */
     public function sendPictureMsg($accidFrom, $to, $open,
                                 $picName, $picMD5, $picUrl, $picExt, $picWidth, $picHeight, $picSize,
-                                $antispam, $antispamCustom,
-                                $option, $pushContent, $payload, $ext, array $forcePushList = [], $forcePushContent,
-                                $forcePushAll, $bid, $useYidun, $markRead, $checkFriend) {
+                                $antispam = false, $antispamCustom = '',
+                                $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
+                                $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
         $picWidth = intval($picWidth);
         $picHeight = intval($picHeight);
         $picSize = intval($picSize);
@@ -242,19 +242,19 @@ class Chat extends Base
 
     /**
      * 发送语音消息
-     * @param $accidFrom
-     * @param $to
-     * @param $open
-     * @param $audioDur
-     * @param $audioMD5
-     * @param $audioUrl
-     * @param $audioExt
+     * @param string $accidFrom
+     * @param string $to
+     * @param int $open
+     * @param int $audioDur
+     * @param string $audioMD5
+     * @param string $audioUrl
+     * @param string $audioExt
      * @param int $audioSize
-     * @param $antispam
-     * @param $antispamCustom
-     * @param $option
-     * @param $pushContent
-     * @param $payload
+     * @param bool $antispam
+     * @param string $antispamCustom
+     * @param string $option
+     * @param string $pushContent
+     * @param array $payload
      * @param $ext
      * @param array $forcePushList
      * @param $forcePushContent
@@ -270,10 +270,10 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
     public function sendAudioMsg($accidFrom, $to, $open,
-                                   $audioDur, $audioMD5, $audioUrl, $audioExt, $audioSize,
-                                   $antispam, $antispamCustom,
-                                   $option, $pushContent, $payload, $ext, array $forcePushList = [], $forcePushContent,
-                                   $forcePushAll, $bid, $useYidun, $markRead, $checkFriend) {
+                                 $audioDur, $audioMD5, $audioUrl, $audioExt, $audioSize,
+                                 $antispam = false, $antispamCustom = '',
+                                 $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
+                                 $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
         $audioDur = intval($audioDur);
         $audioSize = intval($audioSize);
 
@@ -331,12 +331,12 @@ class Chat extends Base
      * @param int $videoWidth
      * @param int $videoHeight
      * @param int $videoSize
-     * @param $antispam
-     * @param $antispamCustom
-     * @param $option
-     * @param $pushContent
-     * @param $payload
-     * @param $ext
+     * @param bool $antispam
+     * @param string $antispamCustom
+     * @param string $option
+     * @param string $pushContent
+     * @param array $payload
+     * @param string $ext
      * @param array $forcePushList
      * @param $forcePushContent
      * @param $forcePushAll
@@ -351,10 +351,10 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
     public function sendVideoMsg($accidFrom, $to, $open,
-                                   $videoDur, $videoMD5, $videoUrl, $videoExt, $videoWidth, $videoHeight, $videoSize,
-                                   $antispam, $antispamCustom,
-                                   $option, $pushContent, $payload, $ext, array $forcePushList = [], $forcePushContent,
-                                   $forcePushAll, $bid, $useYidun, $markRead, $checkFriend) {
+                                 $videoDur, $videoMD5, $videoUrl, $videoExt, $videoWidth, $videoHeight, $videoSize,
+                                 $antispam = false, $antispamCustom = '',
+                                 $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
+                                 $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
         $videoDur = intval($videoDur);
         $videoWidth = intval($videoWidth);
         $videoHeight = intval($videoHeight);
@@ -432,10 +432,10 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
     public function sendPositionMsg($accidFrom, $to, $open,
-                                $title, $lng, $lat,
-                                $antispam, $antispamCustom,
-                                $option, $pushContent, $payload, $ext, array $forcePushList = [], $forcePushContent,
-                                $forcePushAll, $bid, $useYidun, $markRead, $checkFriend) {
+                                    $title, $lng, $lat,
+                                    $antispam = false, $antispamCustom = '',
+                                    $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
+                                    $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
 
         $body = json_encode([
             'title' => $title,
@@ -497,10 +497,10 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
     public function sendFileMsg($accidFrom, $to, $open,
-                                    $fileName, $fileMD5, $fileUrl, $fileExt, $fileSize,
-                                    $antispam, $antispamCustom,
-                                    $option, $pushContent, $payload, $ext, array $forcePushList = [], $forcePushContent,
-                                    $forcePushAll, $bid, $useYidun, $markRead, $checkFriend) {
+                                $fileName, $fileMD5, $fileUrl, $fileExt, $fileSize,
+                                $antispam = false, $antispamCustom = '',
+                                $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
+                                $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
         $fileSize = intval($fileSize);
 
         if (!$fileSize) {
@@ -564,10 +564,10 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
     public function sendCustomMsg($accidFrom, $accidTo, $open,
-                            array $arr,
-                            $antispam, $antispamCustom,
-                            $option, $pushContent, $payload, $ext, array $forcePushList, $forcePushContent,
-                            $forcePushAll, $bid, $useYidun, $markRead, $checkFriend) {
+                                  array $arr,
+                                  $antispam, $antispamCustom,
+                                  $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
+                                  $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
 
 
         $res = $this->sendMsg(
@@ -575,7 +575,7 @@ class Chat extends Base
             $accidTo,
             $open,
             self::CHAT_TYPE_CUSTOM,
-            json_encode($arr, 320),
+            json_encode($arr),
             $antispam,
             $antispamCustom,
             $option,
@@ -614,8 +614,8 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
     private function sendBatchMsg($accidFrom, array $accidsTo, $type, $body,
-                             $option, $pushContent, $payload, $ext,
-                             $bid, $useYidun, $returnMsgid) {
+                             $option = '', $pushContent = '', $payload = [], $ext = '',
+                             $bid = '', $useYidun = NULL, $returnMsgid = FALSE) {
         if (!$accidFrom || !is_string($accidFrom)) {
             throw new YunXinArgExcetption('发送者id不合法！');
         }
@@ -629,14 +629,14 @@ class Chat extends Base
             throw new YunXinArgExcetption('body内容超过限制！');
         }
 
-        $res = $this->sendRequest('/msg/sendBatchMsg.action', [
+        $res = $this->sendRequest('msg/sendBatchMsg.action', [
             'fromAccid' => $accidFrom,
             'toAccids' => json_encode($accidsTo),
             'type' => $type,
             'body' => $body,
             'option' => $option,
             'pushcontent' => $pushContent,
-            'payload' => $payload,
+            'payload' => json_encode($payload),
             'ext' => $ext,
             'bid' => $bid,
             'useYidun' => $useYidun,
@@ -664,8 +664,8 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
     public function sendTextBatchMsg($accidFrom, array $accidsTo, $text,
-                                     $option, $pushContent, $payload, $ext,
-                                     $bid, $useYidun, $returnMsgid) {
+                                     $option = '', $pushContent = '', $payload = [], $ext = '',
+                                     $bid = '', $useYidun = NULL, $returnMsgid = FALSE) {
         $body = json_encode([
             'msg' => $text
         ]);
@@ -713,8 +713,8 @@ class Chat extends Base
      */
     public function sendPictureBatchMsg($accidFrom, array $accidsTo,
                                         $picName, $picMD5, $picUrl, $picExt, $picWidth, $picHeight, $picSize,
-                                        $option, $pushContent, $payload, $ext,
-                                        $bid, $useYidun, $returnMsgid) {
+                                        $option = '', $pushContent = '', $payload = [], $ext = '',
+                                        $bid = '', $useYidun = NULL, $returnMsgid = FALSE) {
         $picWidth = intval($picWidth);
         $picHeight = intval($picHeight);
         $picSize = intval($picSize);
@@ -775,9 +775,9 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
     public function sendAudioBatchMsg($accidFrom, array $accidsTo,
-                                 $audioDur, $audioMD5, $audioUrl, $audioExt, $audioSize,
-                                      $option, $pushContent, $payload, $ext,
-                                      $bid, $useYidun, $returnMsgid) {
+                                      $audioDur, $audioMD5, $audioUrl, $audioExt, $audioSize,
+                                      $option = '', $pushContent = '', $payload = [], $ext = '',
+                                      $bid = '', $useYidun = NULL, $returnMsgid = FALSE) {
         $audioDur = intval($audioDur);
         $audioSize = intval($audioSize);
 
@@ -840,9 +840,9 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
     public function sendVideoBatchMsg($accidFrom, array $accidsTo,
-                                 $videoDur, $videoMD5, $videoUrl, $videoExt, $videoWidth, $videoHeight, $videoSize,
-                                 $option, $pushContent, $payload, $ext,
-                                 $bid, $useYidun, $returnMsgid) {
+                                      $videoDur, $videoMD5, $videoUrl, $videoExt, $videoWidth, $videoHeight, $videoSize,
+                                      $option = '', $pushContent = '', $payload = [], $ext = '',
+                                      $bid = '', $useYidun = NULL, $returnMsgid = FALSE) {
         $videoDur = intval($videoDur);
         $videoWidth = intval($videoWidth);
         $videoHeight = intval($videoHeight);
@@ -906,9 +906,9 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
     public function sendPositionBatchMsg($accidFrom, array $accidsTo,
-                                    $title, $lng, $lat,
-                                    $option, $pushContent, $payload, $ext,
-                                    $bid, $useYidun, $returnMsgid) {
+                                         $title, $lng, $lat,
+                                         $option = '', $pushContent = '', $payload = [], $ext = '',
+                                         $bid = '', $useYidun = NULL, $returnMsgid = FALSE) {
 
         $body = json_encode([
             'title' => $title,
@@ -962,9 +962,9 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
     public function sendFileBatchMsg($accidFrom, array $accidsTo,
-                                $fileName, $fileMD5, $fileUrl, $fileExt, $fileSize,
-                                $option, $pushContent, $payload, $ext,
-                                $bid, $useYidun, $returnMsgid) {
+                                     $fileName, $fileMD5, $fileUrl, $fileExt, $fileSize,
+                                     $option = '', $pushContent = '', $payload = [], $ext = '',
+                                     $bid = '', $useYidun = NULL, $returnMsgid = FALSE) {
         $fileSize = intval($fileSize);
 
         if (!$fileSize) {
@@ -1021,15 +1021,15 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
     public function sendCustomBatchMsg($accidFrom, array $accidsTo,
-                                  array $arr,
-                                  $option, $pushContent, $payload, $ext,
-                                  $bid, $useYidun, $returnMsgid) {
+                                       array $arr,
+                                       $option = '', $pushContent = '', $payload = [], $ext = '',
+                                       $bid = '', $useYidun = NULL, $returnMsgid = FALSE) {
 
         $res = $this->sendBatchMsg(
             $accidFrom,
             $accidsTo,
             self::CHAT_TYPE_CUSTOM,
-            json_encode($arr, 320),
+            json_encode($arr),
             $option,
             $pushContent,
             $payload,
@@ -1102,10 +1102,10 @@ class Chat extends Base
      */
     public function sendAttachMsg($from, $msgType, $to,
                                   array $attach,
-                                  $pushContent, $payload, $sound, $save, $option) {
+                                  $pushContent = '', $payload = [], $sound = '', $save = 2, $option = '') {
         $attachStr = '';
         if ($attach) {
-            $attachStr = json_encode($attach, 320);
+            $attachStr = json_encode($attach);
         }
         $save = intval($save);
         if (!$save) {
@@ -1118,7 +1118,7 @@ class Chat extends Base
         }
 
 
-        $res = $this->sendRequest('/msg/sendAttachMsg.action', [
+        $res = $this->sendRequest('msg/sendAttachMsg.action', [
             'from' => $from,
             'msgtype' => $msgType,
             'to' => $to,
@@ -1139,8 +1139,8 @@ class Chat extends Base
      * @param $msgType
      * @param array $toAccids
      * @param array $attach
-     * @param $pushContent
-     * @param $payload
+     * @param string $pushContent
+     * @param array $payload
      * @param $sound
      * @param $save
      * @param $option
@@ -1152,10 +1152,10 @@ class Chat extends Base
      */
     public function sendAttachBatchMsg($from, array $toAccids,
                                   array $attach,
-                                  $pushContent, $payload, $sound, $save, $option) {
+                                  $pushContent = '', $payload = [], $sound = '', $save = 2, $option = '') {
         $attachStr = '';
         if ($attach) {
-            $attachStr = json_encode($attach, 320);
+            $attachStr = json_encode($attach);
         }
         $save = intval($save);
         if (!$save) {
@@ -1167,7 +1167,7 @@ class Chat extends Base
             throw new YunXinArgExcetption('接受者id组不能为空！');
         }
 
-        $res = $this->sendRequest('/msg/sendBatchAttachMsg.action', [
+        $res = $this->sendRequest('msg/sendBatchAttachMsg.action', [
             'fromAccid' => $from,
             'toAccids' => json_encode($toAccids),
             'attach' => $attachStr,
@@ -1194,8 +1194,10 @@ class Chat extends Base
      * @throws \YunXinHelper\Excetption\YunXinBusinessException
      * @throws \YunXinHelper\Excetption\YunXinNetworkException
      */
-    public function upload($content, $type, $isHttps = false, $expireSec, $tag) {
-        $expireSec = intval($expireSec);
+    public function upload($content, $type, $isHttps = false, $expireSec = NULL, $tag = '') {
+        if ($expireSec) {
+            $expireSec = intval($expireSec);
+        }
         if ($expireSec > 0 && $expireSec < self::ONE_DAY_SECONDS) {
             throw new YunXinArgExcetption('文件过期时间必须大于等于86400！');
         }
@@ -1209,7 +1211,7 @@ class Chat extends Base
             $data['expireSec'] = $expireSec;
         }
 
-        $res = $this->sendRequest('/msg/upload.action', $data);
+        $res = $this->sendRequest('msg/upload.action', $data);
         return $res;
     }
 
@@ -1249,7 +1251,7 @@ class Chat extends Base
             throw new YunXinArgExcetption('推送内容不超过500字符！');
         }
 
-        $res = $this->sendRequest('/msg/recall.action', [
+        $res = $this->sendRequest('msg/recall.action', [
             'deleteMsgid' => $deleteMsgid,
             'timetag' => $timetag,
             'type' => $type,
@@ -1293,7 +1295,7 @@ class Chat extends Base
         if ($targetOs) {
             $data['targetOs'] = json_encode($targetOs);
         }
-        $res = $this->sendRequest('/msg/broadcastMsg.action', $data);
+        $res = $this->sendRequest('msg/broadcastMsg.action', $data);
         return $res['msg'];
     }
 }
