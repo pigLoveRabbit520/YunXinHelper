@@ -164,7 +164,7 @@ class Base
         if ($jsonRes && is_array($jsonRes) && $jsonRes['code'] == self::BUSINESS_SUCCESS_CODE) {
             return $jsonRes;
         } else {
-            throw new YunXinBusinessException('NetEase Business Error: ' . $response);
+            throw new YunXinBusinessException('NetEase Business Error: ' . $body);
         }
     }
 }

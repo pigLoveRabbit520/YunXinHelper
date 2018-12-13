@@ -8,7 +8,7 @@
 namespace YunXinHelper\Api;
 
 
-use YunXinHelper\Excetption\YunXinArgExcetption;
+use YunXinHelper\Exception\YunXinArgExcetption;
 
 class User extends Base
 {
@@ -107,8 +107,8 @@ class User extends Base
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function create($accid, $name, array $props = [], $icon = '', $token = '', $sign = '', $email = '', $birth = '', 
                             $mobile = '', $gender = 0, $ex = '') {
@@ -139,8 +139,8 @@ class User extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function update($accid, array $props = [], $token = '') {
         $this->verifyUserInfo($accid, '', $props, '', $token, '',
@@ -160,8 +160,8 @@ class User extends Base
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function refreshToken($accid) {
         $this->verifyUserInfo($accid, '', [], '', '', '',
@@ -180,8 +180,8 @@ class User extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function block($accid, $kick = false) {
         $this->verifyUserInfo($accid, '', [], '', '', '',
@@ -200,8 +200,8 @@ class User extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function unblock($accid) {
         $this->verifyUserInfo($accid, '', [], '', '', '',
@@ -227,8 +227,8 @@ class User extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function updateUserInfo($accid, $name = '', $icon = '', $sign = '', $email = '',
                                    $birth = '', $mobile = '', $gender = '', $ex = '') {
@@ -255,8 +255,8 @@ class User extends Base
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function getUserInfos(array $accids) {
         if (empty($accids)) {
@@ -265,7 +265,7 @@ class User extends Base
         if (count($accids) > self::GET_UINFOS_LIMIT) {
             throw new YunXinArgExcetption('查询用户数量超过限制！');
         }
-        $res = $this->sendRequest('user/updateUinfo.action', [
+        $res = $this->sendRequest('user/getUinfos.action', [
             'accids' => json_encode($accids)
         ]);
         return $res['uinfos'];
