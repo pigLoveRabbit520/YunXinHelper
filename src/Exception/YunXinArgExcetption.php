@@ -5,7 +5,7 @@
  * Time: 下午1:46
  */
 
-namespace YunXinHelper\Excetption;
+namespace YunXinHelper\Exception;
 
 
 class YunXinArgExcetption extends \Exception

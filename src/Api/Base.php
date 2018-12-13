@@ -4,8 +4,8 @@ namespace YunXinHelper\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
-use YunXinHelper\Excetption\YunXinBusinessException;
-use YunXinHelper\Excetption\YunXinNetworkException;
+use YunXinHelper\Exception\YunXinBusinessException;
+use YunXinHelper\Exception\YunXinNetworkException;
 
 /**
  * User: salamander

@@ -8,7 +8,7 @@
 namespace YunXinHelper\Api;
 
 
-use YunXinHelper\Excetption\YunXinArgExcetption;
+use YunXinHelper\Exception\YunXinArgExcetption;
 
 class Chat extends Base
 {
@@ -61,8 +61,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     private function sendMsg($accidFrom, $accidTo, $open, $type, $body, $antispam = false, $antispamCustom = '',
                             $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
@@ -126,8 +126,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendTextMsg($accidFrom, $to, $open, $text, $antispam = false, $antispamCustom = '',
                                 $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
@@ -187,8 +187,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendPictureMsg($accidFrom, $to, $open,
                                 $picName, $picMD5, $picUrl, $picExt, $picWidth, $picHeight, $picSize,
@@ -266,8 +266,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendAudioMsg($accidFrom, $to, $open,
                                  $audioDur, $audioMD5, $audioUrl, $audioExt, $audioSize,
@@ -347,8 +347,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendVideoMsg($accidFrom, $to, $open,
                                  $videoDur, $videoMD5, $videoUrl, $videoExt, $videoWidth, $videoHeight, $videoSize,
@@ -428,8 +428,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendPositionMsg($accidFrom, $to, $open,
                                     $title, $lng, $lat,
@@ -493,8 +493,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendFileMsg($accidFrom, $to, $open,
                                 $fileName, $fileMD5, $fileUrl, $fileExt, $fileSize,
@@ -560,8 +560,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendCustomMsg($accidFrom, $accidTo, $open,
                                   array $arr,
@@ -610,8 +610,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     private function sendBatchMsg($accidFrom, array $accidsTo, $type, $body,
                              $option = '', $pushContent = '', $payload = [], $ext = '',
@@ -660,8 +660,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendTextBatchMsg($accidFrom, array $accidsTo, $text,
                                      $option = '', $pushContent = '', $payload = [], $ext = '',
@@ -708,8 +708,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendPictureBatchMsg($accidFrom, array $accidsTo,
                                         $picName, $picMD5, $picUrl, $picExt, $picWidth, $picHeight, $picSize,
@@ -771,8 +771,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendAudioBatchMsg($accidFrom, array $accidsTo,
                                       $audioDur, $audioMD5, $audioUrl, $audioExt, $audioSize,
@@ -836,8 +836,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendVideoBatchMsg($accidFrom, array $accidsTo,
                                       $videoDur, $videoMD5, $videoUrl, $videoExt, $videoWidth, $videoHeight, $videoSize,
@@ -902,8 +902,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendPositionBatchMsg($accidFrom, array $accidsTo,
                                          $title, $lng, $lat,
@@ -958,8 +958,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendFileBatchMsg($accidFrom, array $accidsTo,
                                      $fileName, $fileMD5, $fileUrl, $fileExt, $fileSize,
@@ -1017,8 +1017,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendCustomBatchMsg($accidFrom, array $accidsTo,
                                        array $arr,
@@ -1097,8 +1097,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendAttachMsg($from, $msgType, $to,
                                   array $attach,
@@ -1147,8 +1147,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function sendAttachBatchMsg($from, array $toAccids,
                                   array $attach,
@@ -1191,8 +1191,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function upload($content, $type, $isHttps = false, $expireSec = NULL, $tag = '') {
         if ($expireSec) {
@@ -1230,8 +1230,8 @@ class Chat extends Base
      * @return array
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function recallMsg($deleteMsgid, $timetag, $type, $from, $to, $msg,
                               $ignoreTime, $pushContent, $payload) {
@@ -1275,8 +1275,8 @@ class Chat extends Base
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Excetption\YunXinBusinessException
-     * @throws \YunXinHelper\Excetption\YunXinNetworkException
+     * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function broadcastMsg($body, $from, $isOffline = false, $ttl, array $targetOs) {
         if (empty($body)) {
