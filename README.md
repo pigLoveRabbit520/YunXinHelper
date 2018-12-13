@@ -38,16 +38,16 @@ $entrance->user()->getUserInfos($accids);
 ### 消息功能
 ```
 # 文本消息
-$entrance->sendTextMsg($accidFrom, $to, $open, $text);
+$entrance->chat()->sendTextMsg($accidFrom, $to, $open, $text);
 
 # 图片消息
-$entrance->sendPictureMsg($accidFrom, $to, $open,
+$entrance->chat()->sendPictureMsg($accidFrom, $to, $open,
         $picName, $picMD5, $picUrl, $picExt, $picWidth, $picHeight, $picSize);
 
 # 批量文本消息
-$entrance->sendTextBatchMsg($accidFrom, $accidsTo, $text);
+$entrance->chat()->sendTextBatchMsg($accidFrom, $accidsTo, $text);
 
 
 # 发送自定义系统通知
-$entrance->sendAttachMsg($from, CHAT::CHAT_ONT_TO_ONE, $to, $attach);
+$entrance->chat()->sendAttachMsg($from, CHAT::CHAT_ONT_TO_ONE, $to, $attach);
 ```
