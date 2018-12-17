@@ -3,7 +3,6 @@ namespace YunXinHelper\Api;
 
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
 use YunXinHelper\Exception\YunXinBusinessException;
 use YunXinHelper\Exception\YunXinNetworkException;
 
@@ -46,6 +45,19 @@ class Base
     const BUSINESS_SERVICE_NOT_AVAILABLE_CODE = 514; // 服务不可用
     const BUSINESS_UNPACK_ERROR_CODE = 998; // 解包错误
     const BUSINESS_PACK_ERROR_CODE = 999; // 打包错误
+
+    const ACCID_LEGAL_LENGTH = 32;
+
+
+
+    const CHAT_TYPE_TEXT = 0;
+    const CHAT_TYPE_PICTURE = 1;
+    const CHAT_TYPE_AUDIO = 2;
+    const CHAT_TYPE_VIDEO = 3;
+    const CHAT_TYPE_POSITION = 4;
+    const CHAT_TYPE_FILE = 6;
+    const CHAT_TYPE_TIPS = 10;
+    const CHAT_TYPE_CUSTOM = 100;
 
 
     /**
@@ -115,9 +127,6 @@ class Base
         $this->checkSum = sha1($joinString);
     }
 
-    protected function json_encode_chinese($str) {
-        return json_encode($attach, JSON_UNESCAPED_UNICODE);
-    }
 
     /**
      * 设置超时时间

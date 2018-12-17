@@ -3,6 +3,7 @@ namespace YunXinHelper;
 
 
 use YunXinHelper\Api\Chat;
+use YunXinHelper\Api\ChatRoom;
 use YunXinHelper\Api\User;
 
 /**
@@ -50,6 +51,19 @@ class Entrance {
      */
     public function chat() {
         $key = 'chat';
+        if (!array_key_exists($key, $this->instances)) {
+            $chat = new Chat($this->appKey, $this->appSecrt);
+            $this->instances[$key] = $chat;
+        }
+        return $this->instances[$key];
+    }
+
+
+    /**
+     * @return ChatRoom
+     */
+    public function chatRoom() {
+        $key = 'ChatRoom';
         if (!array_key_exists($key, $this->instances)) {
             $chat = new Chat($this->appKey, $this->appSecrt);
             $this->instances[$key] = $chat;
