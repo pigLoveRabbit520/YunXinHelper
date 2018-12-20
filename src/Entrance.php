@@ -65,8 +65,8 @@ class Entrance {
     public function chatRoom() {
         $key = 'ChatRoom';
         if (!array_key_exists($key, $this->instances)) {
-            $chat = new Chat($this->appKey, $this->appSecrt);
-            $this->instances[$key] = $chat;
+            $chatRoom = new ChatRoom($this->appKey, $this->appSecrt);
+            $this->instances[$key] = $chatRoom;
         }
         return $this->instances[$key];
     }
