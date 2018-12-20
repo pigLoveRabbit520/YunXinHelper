@@ -70,4 +70,16 @@ class Entrance {
         }
         return $this->instances[$key];
     }
+
+
+    /**
+     * 抄送消息验证检验码
+     * @param $body
+     * @param $curTime
+     * @param $checksumPost
+     * @return bool
+     */
+    public function isLegalChecksum($body, $curTime, $checksumPost) {
+        return sha1($this->appSecrt . md5($body), $curTime) === $checksumPost;
+    }
 }
