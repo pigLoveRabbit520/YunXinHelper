@@ -80,6 +80,6 @@ class Entrance {
      * @return bool
      */
     public function isLegalChecksum($body, $curTime, $checksumPost) {
-        return sha1($this->appSecrt . md5($body), $curTime) === $checksumPost;
+        return sha1($this->appSecrt . md5($body) . $curTime) === $checksumPost;
     }
 }
