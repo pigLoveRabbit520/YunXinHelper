@@ -176,4 +176,8 @@ class Base
             throw new YunXinBusinessException('NetEase Business Error: ' . $body);
         }
     }
+
+    protected function bool2String($var) {
+        return $var ? 'true' : 'false';
+    }
 }

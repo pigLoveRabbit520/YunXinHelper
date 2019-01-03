@@ -238,7 +238,7 @@ class ChatRoom extends Base
         $res = $this->sendRequest('chatroom/toggleCloseStat.action', [
             'roomid' => $roomId,
             'operator' => $operator,
-            'valid' => $valid,
+            'valid' => $this->bool2String($valid),
         ]);
         return $res['desc'];
     }
