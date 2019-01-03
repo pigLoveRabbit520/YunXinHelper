@@ -4,6 +4,7 @@ namespace YunXinHelper\Api;
 
 use GuzzleHttp\Client;
 use YunXinHelper\Exception\YunXinBusinessException;
+use YunXinHelper\Exception\YunXinInnerException;
 use YunXinHelper\Exception\YunXinNetworkException;
 
 /**
@@ -138,10 +139,11 @@ class Base
 
     /**
      * 发送请求
-     * @param $uri
+     * @param string $uri
      * @param array $data
-     * @return array
+     * @return mixed
      * @throws YunXinBusinessException
+     * @throws YunXinInnerException
      * @throws YunXinNetworkException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -172,8 +174,10 @@ class Base
         $jsonRes = json_decode((string)$body, true);
         if ($jsonRes && is_array($jsonRes) && $jsonRes['code'] == self::BUSINESS_SUCCESS_CODE) {
             return $jsonRes;
+        } elseif ($jsonRes && is_array($jsonRes)) {
+            throw new YunXinBusinessException($jsonRes['desc'], $jsonRes['code']);
         } else {
-            throw new YunXinBusinessException('NetEase Business Error: ' . $body);
+            throw new YunXinInnerException('NetEase inner error: ' . $body);
         }
     }
 
