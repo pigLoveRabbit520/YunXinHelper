@@ -507,16 +507,17 @@ class ChatRoom extends Base
 
 
     /**
-     * @param int $roomId
-     * @param string $operator
-     * @param string $target
-     * @param int $muteDuration
+     * @param $roomId
+     * @param $operator
+     * @param $target
+     * @param $muteDuration
      * @param bool $needNotify
      * @param string $notifyExt
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinInnerException
      * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function temporaryMute($roomId, $operator, $target, $muteDuration, $needNotify = TRUE, $notifyExt = '') {
@@ -547,7 +548,7 @@ class ChatRoom extends Base
             'operator' => $operator,
             'target' => $target,
             'muteDuration' => $muteDuration,
-            'needNotify' => $needNotify,
+            'needNotify' => $needNotify ? 'true' : 'false',
             'notifyExt' => $notifyExt,
         ]);
         return $res['desc'];
