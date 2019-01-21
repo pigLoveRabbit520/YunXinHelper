@@ -150,7 +150,7 @@ class ChatRoom extends Base
 
 
     /**
-     * 创建聊天室
+     * 更新聊天室
      * @param $creator
      * @param $name
      * @param string $announcement
