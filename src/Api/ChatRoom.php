@@ -163,7 +163,7 @@ class ChatRoom extends Base
      * @throws \YunXinHelper\Exception\YunXinBusinessException
      * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
-    public function update($roomId, $name, $announcement = '', $broadcasturl = '', $ext = '', $needNotify = TRUE,
+    public function update($roomId, $name = '', $announcement = '', $broadcasturl = '', $ext = '', $needNotify = TRUE,
                            $notifyExt = '', $queuelevel = NULL) {
         if (!is_int($roomId)) {
             throw new YunXinArgExcetption('房间id不合法！');
