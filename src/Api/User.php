@@ -115,7 +115,7 @@ class User extends Base
         $this->verifyUserInfo($accid, $name, $props, $icon, $token, $sign,
             $email, $birth, $mobile, $gender, $ex);
 
-        $res = $this->sendRequest('user/create.action', [
+        $res = $this->sendRequest('user/create.action', array_filter([
             'accid' => $accid,
             'name' => $name,
             'props' => json_encode($props),
@@ -127,7 +127,7 @@ class User extends Base
             'mobile' => $mobile,
             'gender' => $gender,
             'ex' => $ex,
-        ]);
+        ]));
         return $res['info'];
     }
 
@@ -235,7 +235,7 @@ class User extends Base
         $this->verifyUserInfo($accid, $name, [], $icon, '', $sign,
             $email, $birth, $mobile, $gender, $ex);
 
-        $res = $this->sendRequest('user/updateUinfo.action', [
+        $res = $this->sendRequest('user/updateUinfo.action', array_filter([
             'accid' => $accid,
             'name' => $name,
             'icon' => $icon,
@@ -245,7 +245,7 @@ class User extends Base
             'mobile' => $mobile,
             'gender' => $gender,
             'ex' => $ex,
-        ]);
+        ]));
         return $res;
     }
 
