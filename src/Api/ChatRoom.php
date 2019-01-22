@@ -125,15 +125,15 @@ class ChatRoom extends Base
         return $res['chatroom'];
     }
 
-
     /**
      * 批量查询聊天室信息
      * @param array $roomIds
      * @param bool $needOnlineUserCount
-     * @return array
+     * @return mixed
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinInnerException
      * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function getBatch(array $roomIds, $needOnlineUserCount = false) {
@@ -148,23 +148,25 @@ class ChatRoom extends Base
         return $res;
     }
 
-
     /**
      * 更新聊天室
-     * @param $creator
-     * @param $name
-     * @param string $announcement
-     * @param string $broadcasturl
-     * @param string $ext
-     * @param int $queuelevel
-     * @return array
+     * @param $roomId
+     * @param null $name
+     * @param null $announcement
+     * @param null $broadcasturl
+     * @param null $ext
+     * @param bool $needNotify
+     * @param null $notifyExt
+     * @param null $queuelevel
+     * @return mixed
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinInnerException
      * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
-    public function update($roomId, $name = '', $announcement = '', $broadcasturl = '', $ext = '', $needNotify = TRUE,
-                           $notifyExt = '', $queuelevel = NULL) {
+    public function update($roomId, $name = NULL, $announcement = NULL, $broadcasturl = NULL, $ext = NULL, $needNotify = TRUE,
+                           $notifyExt = NULL, $queuelevel = NULL) {
         if (!is_int($roomId)) {
             throw new YunXinArgExcetption('房间id不合法！');
         }
@@ -181,7 +183,7 @@ class ChatRoom extends Base
             throw new YunXinArgExcetption('聊天室扩展字段超过限制！');
         }
         $levelLegalArr = [self::QUEUE_LEVEL_ALL, self::QUEUE_LEVEL_ADMIN];
-        if (!in_array($queuelevel, $levelLegalArr)) {
+        if (is_numeric($queuelevel) && !in_array($queuelevel, $levelLegalArr)) {
             throw new YunXinArgExcetption('聊天室queuelevel参数不合法');
         }
         if (strlen($notifyExt) > self::CHAT_ROOM_NOTIFY_EXT_LIMIT) {
@@ -190,22 +192,22 @@ class ChatRoom extends Base
         $data = [
             'roomid' => $roomId,
         ];
-        if ($name) {
+        if (isset($name)) {
             $data['name'] = $name;
         }
-        if ($announcement) {
+        if (isset($announcement)) {
             $data['announcement'] = $announcement;
         }
-        if ($broadcasturl) {
+        if (isset($broadcasturl)) {
             $data['broadcasturl'] = $broadcasturl;
         }
-        if ($ext) {
+        if (isset($ext)) {
             $data['ext'] = $ext;
         }
         if (isset($needNotify)) {
             $data['needNotify'] = $needNotify;
         }
-        if ($notifyExt) {
+        if (isset($notifyExt)) {
             $data['notifyExt'] = $notifyExt;
         }
         if (isset($queuelevel)) {
@@ -216,15 +218,17 @@ class ChatRoom extends Base
         return $res['chatroom'];
     }
 
+
     /**
      * 修改聊天室开/关闭状态
      * @param $roomId
-     * @param string $operator 必须是创建者才可以操作
-     * @param bool $valid
+     * @param $operator
+     * @param $valid
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \YunXinHelper\Exception\YunXinBusinessException
+     * @throws \YunXinHelper\Exception\YunXinInnerException
      * @throws \YunXinHelper\Exception\YunXinNetworkException
      */
     public function toggleCloseStatus($roomId, $operator, $valid) {
