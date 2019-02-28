@@ -294,7 +294,7 @@ class ChatRoom extends Base
             'operator' => $operator,
             'target' => $target,
             'opt' => $opt,
-            'optvalue' => $optValue,
+            'optvalue' => $this->bool2String($optValue),
             'notifyExt' => $notifyExt,
         ]);
         return $res['desc'];
@@ -386,9 +386,9 @@ class ChatRoom extends Base
             'antispamCustom' => $antispamCustomStr,
             'skipHistory' => $skipHistory,
             'bid' => $bid,
-            'highPriority' => $highPriority,
+            'highPriority' => $this->bool2String($highPriority),
             'useYidun' => $useYidun,
-            'needHighPriorityMsgResend' => $needHighPriorityMsgResend,
+            'needHighPriorityMsgResend' => $this->bool2String($needHighPriorityMsgResend),
         ]);
         return $res['desc'];
     }
@@ -721,8 +721,8 @@ class ChatRoom extends Base
         $res = $this->sendRequest('chatroom/muteRoom.action', [
             'roomid' => $roomId,
             'operator' => $operator,
-            'mute' => $mute,
-            'needNotify' => $needNotify,
+            'mute' => $this->bool2String($mute),
+            'needNotify' => $this->bool2String($needNotify),
             'notifyExt' => $notifyExt,
         ]);
         return $res['desc'];
@@ -879,7 +879,7 @@ class ChatRoom extends Base
             'operator' => $operator,
             'elements' => json_encode($elements),
             'needNotify' => $needNotify,
-            'notifyExt' => $notifyExt,
+            'notifyExt' => $this->bool2String($notifyExt),
         ]);
         return $res['desc'];
     }
