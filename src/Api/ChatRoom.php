@@ -120,7 +120,7 @@ class ChatRoom extends Base
 
         $res = $this->sendRequest('chatroom/get.action', [
             'roomid' => $roomId,
-            'needOnlineUserCount' => $needOnlineUserCount,
+            'needOnlineUserCount' => $this->bool2String($needOnlineUserCount),
         ]);
         return $res['chatroom'];
     }
@@ -143,7 +143,7 @@ class ChatRoom extends Base
 
         $res = $this->sendRequest('chatroom/getBatch.action', [
             'roomids' => json_encode($roomIds),
-            'needOnlineUserCount' => $needOnlineUserCount,
+            'needOnlineUserCount' => $this->bool2String($needOnlineUserCount),
         ]);
         return $res;
     }
@@ -205,7 +205,7 @@ class ChatRoom extends Base
             $data['ext'] = $ext;
         }
         if (isset($needNotify)) {
-            $data['needNotify'] = $needNotify;
+            $data['needNotify'] = $this->bool2String($needNotify);
         }
         if (isset($notifyExt)) {
             $data['notifyExt'] = $notifyExt;
