@@ -51,7 +51,7 @@ class Chat extends Base
      * @param string $bid
      * @param null $useYidun
      * @param int $markRead
-     * @param string $checkFriend
+     * @param bool $checkFriend
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws YunXinBusinessException
@@ -60,7 +60,7 @@ class Chat extends Base
      */
     private function sendMsg($accidFrom, $accidTo, $open, $type, $body, $antispam = false, array $antispamCustom = [],
                             $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
-                            $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = 'false') {
+                            $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
         if (!$accidFrom || !is_string($accidFrom)) {
             throw new YunXinArgExcetption('发送者id不能为空！');
         }
@@ -100,7 +100,7 @@ class Chat extends Base
             'bid' => $bid,
             'useYidun' => $useYidun,
             'markRead' => $markRead,
-            'checkFriend' => $checkFriend,
+            'checkFriend' => $this->bool2String($checkFriend),
         ]);
         return $res;
     }
@@ -123,7 +123,7 @@ class Chat extends Base
      * @param string $bid
      * @param null $useYidun
      * @param int $markRead
-     * @param string $checkFriend
+     * @param bool $checkFriend
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws YunXinBusinessException
@@ -132,7 +132,7 @@ class Chat extends Base
      */
     public function sendTextMsg($accidFrom, $to, $open, $text, $antispam = false, array $antispamCustom = [],
                                 $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
-                                $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = 'false') {
+                                $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
         $body = json_encode([
             'msg' => $text
         ]);
@@ -184,7 +184,7 @@ class Chat extends Base
      * @param string $bid
      * @param null $useYidun
      * @param int $markRead
-     * @param string $checkFriend
+     * @param bool $checkFriend
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws YunXinBusinessException
@@ -195,7 +195,7 @@ class Chat extends Base
                                 $picName, $picMD5, $picUrl, $picExt, $picWidth, $picHeight, $picSize,
                                 $antispam = false, array $antispamCustom = [],
                                 $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
-                                $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = 'false') {
+                                $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
         $picWidth = intval($picWidth);
         $picHeight = intval($picHeight);
         $picSize = intval($picSize);
@@ -262,7 +262,7 @@ class Chat extends Base
      * @param string $bid
      * @param null $useYidun
      * @param int $markRead
-     * @param string $checkFriend
+     * @param bool $checkFriend
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws YunXinBusinessException
@@ -273,7 +273,7 @@ class Chat extends Base
                                  $audioDur, $audioMD5, $audioUrl, $audioExt, $audioSize,
                                  $antispam = false, array $antispamCustom = [],
                                  $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
-                                 $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = 'false') {
+                                 $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
         $audioDur = intval($audioDur);
         $audioSize = intval($audioSize);
 
@@ -342,7 +342,7 @@ class Chat extends Base
      * @param string $bid
      * @param null $useYidun
      * @param int $markRead
-     * @param string $checkFriend
+     * @param bool $checkFriend
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws YunXinBusinessException
@@ -353,7 +353,7 @@ class Chat extends Base
                                  $videoDur, $videoMD5, $videoUrl, $videoExt, $videoWidth, $videoHeight, $videoSize,
                                  $antispam = false, array $antispamCustom = [],
                                  $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
-                                 $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = 'false') {
+                                 $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
         $videoDur = intval($videoDur);
         $videoWidth = intval($videoWidth);
         $videoHeight = intval($videoHeight);
@@ -422,7 +422,7 @@ class Chat extends Base
      * @param string $bid
      * @param null $useYidun
      * @param int $markRead
-     * @param string $checkFriend
+     * @param bool $checkFriend
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws YunXinBusinessException
@@ -433,7 +433,7 @@ class Chat extends Base
                                     $title, $lng, $lat,
                                     $antispam = false, array $antispamCustom = [],
                                     $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
-                                    $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = 'false') {
+                                    $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
 
         $body = json_encode([
             'title' => $title,
@@ -487,7 +487,7 @@ class Chat extends Base
      * @param string $bid
      * @param null $useYidun
      * @param int $markRead
-     * @param string $checkFriend
+     * @param bool $checkFriend
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws YunXinBusinessException
@@ -498,7 +498,7 @@ class Chat extends Base
                                 $fileName, $fileMD5, $fileUrl, $fileExt, $fileSize,
                                 $antispam = false, array $antispamCustom = [],
                                 $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
-                                $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = 'false') {
+                                $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
         $fileSize = intval($fileSize);
 
         if (!$fileSize) {
@@ -554,7 +554,7 @@ class Chat extends Base
      * @param string $bid
      * @param null $useYidun
      * @param int $markRead
-     * @param string $checkFriend
+     * @param bool $checkFriend
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws YunXinBusinessException
@@ -565,7 +565,7 @@ class Chat extends Base
                                   array $arr,
                                   $antispam, array $antispamCustom = [],
                                   $option = '', $pushContent = '', $payload = [], $ext = '', array $forcePushList = [], $forcePushContent = '',
-                                  $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = 'false') {
+                                  $forcePushAll = false, $bid = '', $useYidun = NULL, $markRead = 0, $checkFriend = false) {
 
 
         $res = $this->sendMsg(
